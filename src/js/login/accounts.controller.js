@@ -43,22 +43,22 @@
         }
 
         function switchToListMode() {
-            accounts.caption = 'ACCOUNTS';
+            accounts.caption = 'CONTAS';
         }
 
         function switchToCreateSeedMode() {
-            accounts.caption = 'SET UP YOUR SEED';
+            accounts.caption = 'CONFIGURE SEU SEED';
         }
 
         function switchToRegisterMode(seed) {
-            accounts.caption = 'REGISTER ACCOUNT';
+            accounts.caption = 'NOVA CONTA';
             accounts.displayAddress = cryptoService.buildRawAddressFromSeed(seed);
             // setting a seed to register a new account
             loginContext.seed = seed;
         }
 
         function switchToLoginMode(account) {
-            accounts.caption = 'SIGN IN';
+            accounts.caption = 'LOGIN';
             accounts.displayAddress = account.address;
             // setting an account which we would like to sign in
             loginContext.currentAccount = account;
