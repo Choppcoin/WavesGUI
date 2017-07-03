@@ -19,7 +19,7 @@
 <html ng-app="app" ng-csp>
 <head>
   <meta charset="utf-8">
-  <title>Waves Lite Client</title>
+  <title>Choppcoin Wallet</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- CSS BEGIN -->
   <link rel="stylesheet" href="../bower_components/angular/angular-csp.css">
@@ -27,6 +27,17 @@
   <link rel="stylesheet" href="../distr/devel/css/style.css">
   <!-- CSS END -->
   <link href="img/favicon.ico" type="image/x-icon" rel="shortcut icon">
+
+  <style>
+    #logoNversion > img {
+        width: 10rem;
+    }
+
+    .ng-binding{
+        /*color: orange;*/
+    }
+  </style>
+
 </head>
 
 <body ng-controller="homeController as home" ng-switch on="home.screen">
@@ -36,7 +47,7 @@
   <div id="logo-container-centered" class="centerIt">
     <div id="logoo">
       <img id="logo-spin" src="img/logo-spin.svg" />
-      <p id="networkCheck">Loading...</p>
+      <p id="networkCheck">Carregando...</p>
     </div>
   </div>
 </div>
@@ -63,25 +74,25 @@
                                     <span class="loginAccount fade" tooltipster tooltip-theme="tooltipster-theme1" title="Log into this account." ng-click="list.signIn(account)"> <br/>
                                         <b>{{::account.name}}</b> <span class="divider-1"></span> <small>{{::account.address}}</small>
                                     </span>
-              <span class="clipSpan" tooltipster tooltip-theme="tooltipster-theme1" ngclipboard title="Copy this address to the clipboard." data-clipboard-text="{{::account.address}}" ngclipboard-success="clipboardOk()"></span>
+              <span class="clipSpan" tooltipster tooltip-theme="tooltipster-theme1" ngclipboard title="Copiar este endereço." data-clipboard-text="{{::account.address}}" ngclipboard-success="clipboardOk()"></span>
               <span class="divider-1"></span>
-              <button class="removeAccount wButtonAlt fade" tooltipster tooltip-theme="tooltipster-theme1" title="Remove this account from the list." ng-click="list.showRemoveWarning($index)">
-                <span class="wButton-icon"><img src="img/wIcon_x.svg"></span>REMOVE
+              <button class="removeAccount wButtonAlt fade" tooltipster tooltip-theme="tooltipster-theme1" title="Remover da lista." ng-click="list.showRemoveWarning($index)">
+                <span class="wButton-icon"><img src="img/wIcon_x.svg"></span>REMOVER
               </button>
             </p>
 
-            <button id="import_account" class="wButton fade" tooltipster tooltip-theme="tooltipster-theme1" title="Click here to import an existing account." ng-click="list.importAccount()">IMPORTAR CONTA</button>
+            <button id="import_account" class="wButton fade" tooltipster tooltip-theme="tooltipster-theme1" title="Clique para importar uma conta existente." ng-click="list.importAccount()">IMPORTAR CONTA</button>
             <span class="divider-1"></span>
-            <button id="create_account" class="wButton fade" tooltipster tooltip-theme="tooltipster-theme1" title="Click here to create a brand new account." ng-click="list.createAccount()">NOVA CONTA</button>
+            <button id="create_account" class="wButton fade" tooltipster tooltip-theme="tooltipster-theme1" title="Clique para criar uma nova conta." ng-click="list.createAccount()">NOVA CONTA</button>
             <br/>
 
             <!-- Remove Account popup -->
-            <div id="account-remove-popup" waves-dialog on-dialog-ok="list.removeAccount()" is-error="true" ok-button-caption="REMOVE">
-              <h2 class="sectionHeader">REMOVE ACCOUNT - NOTICE</h2>
-              <p class="dialog-text">This feature completely removes the account from this device.</p>
-              <p class="dialog-text">The account will not be eliminated or destroyed, but instead will not be shown anymore in the Accounts List at the client startup.</p>
-              <p class="dialog-text">You can always re-generate your account on this device again using the Import Account feature and entering the SEED when prompted.</p>
-              <p class="dialog-text">Click on the REMOVE button to proceed with the account removal, or CANCEL to return to the previous screen.</p>
+            <div id="account-remove-popup" waves-dialog on-dialog-ok="list.removeAccount()" is-error="true" ok-button-caption="REMOVER">
+              <h2 class="sectionHeader">REMOVER CONTA</h2>
+              <p class="dialog-text">Esta funcionalidade remove esta conta desse dispositivo.</p>
+              <p class="dialog-text">A conta não será eliminada, apenas não irá aparecer na listagem inicial.</p>
+              <p class="dialog-text">Você poderá sempre recriar sua conta nesse dispositivo, basta ir em IMPORTAR CONTA e colocar o seu SEED.</p>
+              <p class="dialog-text">Clique em REMOVER para prosseguir ou CANCEL para retornar a tela anterior.</p>
             </div>
           </div>
 
@@ -89,45 +100,45 @@
           <div id="create-seed" ng-controller="accountSeedController as vm" ng-show="accounts.mode === 'create-seed'">
             <form id="account-seed-form" name="accountSeedForm" ng-submit="vm.checkSeedAndRegister(accountSeedForm)" novalidate ng-validate="vm.validationOptions">
 
-              <button id="generateRandomSeed" class="wButton fade" ng-click="vm.generateSeed()" type="button">GENERATE NEW SEED</button>
+              <button id="generateRandomSeed" class="wButton fade" ng-click="vm.generateSeed()" type="button">GERAR NOVO SEED</button>
               <br/><br/>
               <div class="form-field">
-                <label for="walletSeed">WALLET SEED</label>
+                <label for="walletSeed">SEU SEED</label>
                 <br/>
                 <textarea id="walletSeed" rows="4" name="walletSeed" class="wInput" focus-me="accounts.mode === 'create-seed'" ng-model="vm.seed" ng-change="vm.refreshAddress()" ng-model-options="{ debounce: 750 }" ng-trim="false"></textarea>
-                <span class="clipSpan" tooltipster tooltip-theme="tooltipster-theme1" title="Copy the seed to the clipboard." data-clipboard-target="#walletSeed" data-clipboard-message-success="Wallet seed has been successfully copied to clipboard" ></span>
+                <span class="clipSpan" tooltipster tooltip-theme="tooltipster-theme1" title="Copiar o SEED." data-clipboard-target="#walletSeed" data-clipboard-message-success="Wallet seed has been successfully copied to clipboard" ></span>
                 <br/>
               </div>
               <br/>
 
               <div class="wPop-content">
-                <div>ADDRESS
+                <div>ENDEREÇO
                   <br/>
                   <span>{{vm.displayAddress}}</span>
                 </div>
               </div>
-              <button class="wButton fade" type="submit">REGISTER ACCOUNT</button>
+              <button class="wButton fade" type="submit">REGISTRAR CONTA</button>
               <span class="divider-2"></span>
-              <button class="wButton fade" type="reset" ng-click="vm.back()">BACK</button>
+              <button class="wButton fade" type="reset" ng-click="vm.back()">VOLTAR</button>
 
               <div id="seed-whitespace-popup" waves-dialog on-dialog-ok="vm.registerAccount()" closeable="false" ok-button-caption="PROCEED">
-                <h2 class="sectionHeader">SEED NOTICE</h2>
-                <p class="dialog-text">Your wallet seed contains one or more trailing whitespace characters.</p>
-                <p class="dialog-text">A seed with a whitespace at the end and a seed without one are different, and will result in different addresses generated.</p>
-                <p class="dialog-text">It is strongly recommended that you avoid trailing whitespaces in the seed. If you understand the implications of including a trailing whitespace
-                  in your seed, press <b>PROCEED</b>. Press <b>CANCEL</b> or close the dialog box to edit your seed.<br/></p>
+                <h2 class="sectionHeader">AVISO SOBRE O SEU SEED</h2>
+                <p class="dialog-text">O seu SEED contém um ou mais espaços em branco no início ou no final do texto.</p>
+                <p class="dialog-text">Um SEED com esses espaços é diferente de outro sem os espaços, e irá resultar num novo endereço.</p>
+                <p class="dialog-text">É altamente recomendado que você deixe os espaços em branco apenas para separação das palavras.
+                  Se você entende as implicações do que está sendo dito aqui, pressione <b>PROCEDER</b>. Do contrário, pressione <b>CANCELAR</b> e edite o seu SEED.<br/></p>
               </div>
             </form>
           </div>
 
           <div id="login-wPop-new" waves-dialog ok-button-caption="I UNDERSTAND" on-dialog-ok="" cancel-button-visible="false" closeable="false">
-            <h2 class="sectionHeader">NEW ACCOUNT - NOTICE</h2>
-            <p class="dialog-text">This feature involves the creation of a new account on Waves platform.</p>
-            <p class="dialog-text">The procedure consists of complex cryptographic operations that use a <b>SEED</b> (a series of random words) to create a unique address for your account.</p>
-            <p class="dialog-text">This SEED is extremely important and must be kept in safe place, since it's the only way to recover your account in case of lost, corrupted data or hardware failure.</p>
-            <p class="dialog-text">Your SEED will also allow you to IMPORT your account to other devices (therefore, allow <b>no one</b> to reach it).
+            <h2 class="sectionHeader">NOVA CONTA</h2>
+            <p class="dialog-text">Esta funcionalidade cria uma nova conta na plataforma Waves / Choppcoin.</p>
+            <p class="dialog-text">Este procedimento consiste em uma série complexa de criptografia que usa o <b>SEED</b> (Série de palavras aleatórias) para criar um endereço único para sua conta.</p>
+            <p class="dialog-text">O SEED é extremamente importante e deve ser mantido num local seguro, já que é o único meio de acessar a sua conta.</p>
+            <p class="dialog-text">É ele que irá permitir você acessar sua mesma conta em qualquer outro dispositivo (portanto, não deixe que <b>ninguém mais</b> tenha acesso a ele).
               <br/><br/>
-              <i>NOTE: Make sure that you select the entire SEED length before keeping it. It's suggested to use the copy-to-clipboard button located the right side of the SEED box.</i></p>
+              <i>NOTA: Tenha certeza de selecionar todo o SEED antes de copiá-lo para BACKUP.</i></p>
           </div>
 
           <!-- store account on the current device -->
@@ -138,12 +149,12 @@
                 <br/>
                 <textarea id="readonlySeed" rows="4" class="wInput" ng-model="vm.seed" ng-model-options="{ getterSetter: true }" readonly></textarea>
                 <br/><br/>
-                <div>ADDRESS
+                <div>ENDEREÇO
                   <br/>
                   <span>{{accounts.displayAddress}}</span>
                 </div>
                 <br/>
-
+                <!--
                 <div class="form-field">
                   <label for="walletName">
                     NAME<span class="infoSpan" tooltipster tooltip-theme="tooltipster-theme1" tooltip-html title="It is possible to assign a name to your account(s)
@@ -160,51 +171,46 @@
                   <input type="text" id="walletName" name="walletName" class="wInput" ng-model="vm.name" focus-me="accounts.mode === 'register'"/>
                 </div>
                 <br/>
+                -->
                 <div class="form-field">
                   <label for="walletPassword">
-                    PASSWORD<span class="infoSpan" tooltipster tooltip-theme="tooltipster-theme1" tooltip-html title="Used to encrypt your wallet seed, the password
-                                                <br/>
-                                                will be prompted at the time of login.
-                                                <br/><br/>
-                                                It is imperative that the user keeps it in a safe
-                                                <br/>
-                                                place at all times."></span>
+                    SENHA<span class="infoSpan" tooltipster tooltip-theme="tooltipster-theme1" tooltip-html title=""></span>
                   </label>
                   <br/>
                   <input type="password" id="walletPassword" name="walletPassword" class="wInput" ng-model="vm.password"/>
                 </div>
                 <br/>
                 <div class="form-field">
-                  <label for="walletPasswordConfirm">REPEAT PASSWORD</label>
+                  <label for="walletPasswordConfirm">REPITA SUA SENHA</label>
                   <br/>
                   <input type="password" id="walletPasswordConfirm" name="walletPasswordConfirm" class="wInput" ng-model="vm.confirmPassword"/>
                 </div>
                 <br/>
 
-                <button class="wButton fade" type="submit">REGISTER</button>
+                <button class="wButton fade" type="submit">REGISTRAR</button>
                 <span class="divider-2"></span>
-                <button class="wButton fade" type="reset" ng-click="vm.cancel()">CANCEL</button>
+                <button class="wButton fade" type="reset" ng-click="vm.cancel()">CANCELAR</button>
               </div>
             </form>
           </div>
           <!-- log in to selected account -->
           <div id="account-login" ng-controller="accountLoginController as vm" ng-show="accounts.mode === 'login'">
             <form id="login-form">
-              <div>ACCOUNT
+              <div>CONTA
                 <br/>
                 <span>{{accounts.displayAddress}}</span>
               </div>
               <br/>
 
-              <label for="accountPassword">PASSWORD</label>
+              <label for="accountPassword">SENHA</label>
               <br/>
 
               <input type="password" id="accountPassword" class="wInput" ng-model="vm.password" focus-me="accounts.mode === 'login'"/>
               <br/><br/>
 
-              <button class="wButton fade" ng-click="vm.signIn()">LOG IN</button>
+              <button class="wButton fade" ng-click="vm.signIn()">LOGIN</button>
               <span class="divider-2"></span>
-              <button class="wButton fade" ng-click="vm.cancel()">CANCEL</button>
+              <button class="wButton fade" ng-click="vm.cancel()">CANCELAR</button>
             </form>
           </div>
         </div>

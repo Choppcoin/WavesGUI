@@ -9,7 +9,8 @@
         Currency.EUR,
         Currency.CNY,
         Currency.WCT,
-        Currency.MRT
+        Currency.MRT,
+        Currency.CHOPP
     ];
 
     angular

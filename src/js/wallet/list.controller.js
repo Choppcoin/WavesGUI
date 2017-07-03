@@ -39,6 +39,10 @@
             {
                 balance: new Money(0, Currency.WAVES),
                 depositWith: Currency.BTC
+            },
+            {
+                balance: new Money(0, Currency.CHOPP),
+                depositWith: Currency.USD
             }
         ];
 

@@ -25,6 +25,10 @@
             image: 'wB-bg-RMB.svg',
             displayName: Currency.CNY.displayName
         };
+        mapping[Currency.CHOPP.displayName] = {
+            image: 'wB-bg-RMB.svg',
+            displayName: Currency.CHOPP.displayName
+        };
 
         ctrl.$onChanges = function (changesObject) {
             if (changesObject.balance) {

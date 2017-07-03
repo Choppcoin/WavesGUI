@@ -34,22 +34,39 @@ function AngularApplicationConfig($provide, $compileProvider, $validatorProvider
                                   $sceDelegateProvider, $mdAriaProvider, networkConstants, applicationSettings) {
     'use strict';
 
+/*
+$provide.constant(networkConstants,
+    angular.extend(networkConstants, {
+        NETWORK_NAME: 'devel',
+        NETWORK_CODE: 'T'
+    }));
+$provide.constant(applicationSettings,
+    angular.extend(applicationSettings, {
+        CLIENT_VERSION: '0.4.1a',
+        NODE_ADDRESS: 'http://52.30.47.67:6869',
+        COINOMAT_ADDRESS: 'https://test.coinomat.com',
+        MATCHER_ADDRESS: 'http://52.30.47.67:6886',
+        DATAFEED_ADDRESS: 'http://marketdata.wavesplatform.com'
+    }));
+*/
+
     $provide.constant(networkConstants,
         angular.extend(networkConstants, {
-            NETWORK_NAME: 'devel',
-            NETWORK_CODE: 'T'
+            NETWORK_NAME: 'mainnet',
+            NETWORK_CODE: 'W'
         }));
     $provide.constant(applicationSettings,
         angular.extend(applicationSettings, {
             CLIENT_VERSION: '0.4.1a',
-            NODE_ADDRESS: 'http://52.30.47.67:6869',
-            COINOMAT_ADDRESS: 'https://test.coinomat.com',
-            MATCHER_ADDRESS: 'http://52.30.47.67:6886',
-            DATAFEED_ADDRESS: 'http://marketdata.wavesplatform.com'
+            NODE_ADDRESS: 'https://nodes.wavesnodes.com',
+            COINOMAT_ADDRESS: 'https://coinomat.com',
+            MATCHER_ADDRESS: 'https://nodes.wavesnodes.com',
+            DATAFEED_ADDRESS: 'https://marketdata.wavesplatform.com'
         }));
 
     $compileProvider.imgSrcSanitizationWhitelist(/^\s*(https?|local|data|file|chrome-extension):/);
     $qProvider.errorOnUnhandledRejections(false);
+    
     $sceDelegateProvider.resourceUrlWhitelist([
         'self',
         'https://test.coinomat.com/api/**',
