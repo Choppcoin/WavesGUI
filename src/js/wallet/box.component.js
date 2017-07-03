@@ -25,6 +25,10 @@
             image: 'wB-bg-RMB.svg',
             displayName: Currency.CNY.displayName
         };
+        mapping[Currency.REAL.displayName] = {
+            image: 'wB-bg-BRL.svg',
+            displayName: Currency.REAL.displayName
+        };
         mapping[Currency.CHOPP.displayName] = {
             image: 'wB-bg-RMB.svg',
             displayName: Currency.CHOPP.displayName

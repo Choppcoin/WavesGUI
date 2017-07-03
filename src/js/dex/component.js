@@ -38,7 +38,9 @@
             {amountAsset: Currency.WCT, priceAsset: Currency.WAVES},
             {amountAsset: Currency.WCT, priceAsset: Currency.BTC},
             {amountAsset: Currency.MRT, priceAsset: Currency.WAVES},
-            {amountAsset: Currency.MRT, priceAsset: Currency.BTC}
+            {amountAsset: Currency.MRT, priceAsset: Currency.BTC},
+            {amountAsset: Currency.REAL, priceAsset: Currency.REAL},
+            {amountAsset: Currency.CHOPP, priceAsset: Currency.BTC}
         ];
 
         ctrl.createOrder = function (type, price, amount, fee, callback) {

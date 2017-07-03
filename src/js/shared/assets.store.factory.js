@@ -10,6 +10,7 @@
         Currency.CNY,
         Currency.WCT,
         Currency.MRT,
+        Currency.REAL,
         Currency.CHOPP
     ];
 

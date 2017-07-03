@@ -14,6 +14,7 @@
                 realIds[Currency.USD.id] = 'Ft8X1v1LTa1ABafufpaCWyVj8KkaxUWE6xBhW6sNFJck';
                 realIds[Currency.EUR.id] = 'Gtb1WRznfchDnTh37ezoDTJ4wcoKaRsKqKjJjy7nm2zU';
                 realIds[Currency.CNY.id] = 'DEJbZipbKQjwEiRjx2AqQFucrj5CZ3rAc4ZvFM8nAsoA';
+                realIds[Currency.REAL.id] = 'HFbStiBvJHqpdTfBHAN7qaFdtYzQLqVxY7WprATXPMXm';
                 realIds[Currency.CHOPP.id] = '6N5u1U9HfErXFERGWXGryoYb8CLNHWywdWsJe74kx59i';
 
                 return {
