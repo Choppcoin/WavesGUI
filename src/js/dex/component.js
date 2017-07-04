@@ -39,7 +39,7 @@
             {amountAsset: Currency.WCT, priceAsset: Currency.BTC},
             {amountAsset: Currency.MRT, priceAsset: Currency.WAVES},
             {amountAsset: Currency.MRT, priceAsset: Currency.BTC},
-            {amountAsset: Currency.REAL, priceAsset: Currency.REAL},
+            {amountAsset: Currency.REAL, priceAsset: Currency.BTC},
             {amountAsset: Currency.CHOPP, priceAsset: Currency.BTC}
         ];
 
