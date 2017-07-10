@@ -29,6 +29,18 @@
   <link href="img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
   <style>
+    #bg-spin, header, #tabs, .wB-but  {
+      background: #c98103;
+    }
+
+    waves-transaction-history .transactions-table table thead {
+      background-color: #c98103;
+    }
+
+    .wB-balInt, .wB-name, .wB-balDec {
+      color:#c98103;
+    }
+
     #logoNversion > img {
         width: 10rem;
     }
@@ -131,7 +143,7 @@
             </form>
           </div>
 
-          <div id="login-wPop-new" waves-dialog ok-button-caption="I UNDERSTAND" on-dialog-ok="" cancel-button-visible="false" closeable="false">
+          <div id="login-wPop-new" waves-dialog ok-button-caption="ENTENDI" on-dialog-ok="" cancel-button-visible="false" closeable="false">
             <h2 class="sectionHeader">NOVA CONTA</h2>
             <p class="dialog-text">Esta funcionalidade cria uma nova conta na plataforma Waves / Choppcoin.</p>
             <p class="dialog-text">Este procedimento consiste em uma série complexa de criptografia que usa o <b>SEED</b> (Série de palavras aleatórias) para criar um endereço único para sua conta.</p>
@@ -145,14 +157,20 @@
           <div id="register" ng-controller="accountRegisterController as vm" ng-show="accounts.mode === 'register'">
             <form id="register-form" name="registerForm" novalidate ng-submit="vm.saveAccountAndSignIn(registerForm)" ng-validate="vm.validationOptions">
               <div class="wPop-content">
-                <label for="readonlySeed">WALLET SEED</label>
+                <h3>ATENÇÃO: Faça BACKUP AGORA da sua CHAVE DE SEGURANÇA<br/>(EX: Mande um e-mail para você mesmo com o conteúdo abaixo).</h3>
                 <br/>
-                <textarea id="readonlySeed" rows="4" class="wInput" ng-model="vm.seed" ng-model-options="{ getterSetter: true }" readonly></textarea>
-                <br/><br/>
+                <label for="readonlySeed">CHAVE DE SEGURANÇA (SEED)</label>
+                <br/>
+                <textarea id="readonlySeed" rows="4" class="wInput" ng-model="vm.seed" ng-model-options="{ getterSetter: true }" readonly></textarea> 
+                <span class="clipSpan ng-isolate-scope tooltipstered" tooltipster="" tooltip-theme="tooltipster-theme1" ngclipboard="" data-clipboard-target="#readonlySeed" ngclipboard-success="clipboardOk()"></span>               
+                <br/>
+                <!--                
+                <br/>
                 <div>ENDEREÇO
                   <br/>
                   <span>{{accounts.displayAddress}}</span>
                 </div>
+                -->
                 <br/>
                 <!--
                 <div class="form-field">
@@ -174,7 +192,7 @@
                 -->
                 <div class="form-field">
                   <label for="walletPassword">
-                    SENHA<span class="infoSpan" tooltipster tooltip-theme="tooltipster-theme1" tooltip-html title=""></span>
+                    CRIE UMA SENHA
                   </label>
                   <br/>
                   <input type="password" id="walletPassword" name="walletPassword" class="wInput" ng-model="vm.password"/>
@@ -243,13 +261,15 @@
     <img id="topLogoH" src="img/topleftlogo_hor.svg" alt="Waves platform logo horizontal" />
     <div id="logoNversion2">
       <img src="img/topleftlogo.svg" />
-      <p ng-class='{testnet: isTestnet()}'>{{::home.title}} <span class="wlcversion">{{::home.version}}</span></p>
+      <p ng-class='{testnet: isTestnet()}'><!--{{::home.title}} <span class="wlcversion">{{::home.version}}</span>--></p>
     </div>
-    <span id="version" class="centerIt">Address:
+    <span id="version" class="centerIt">Seu Endereço:
                 <span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{::menu.address}}" ngclipboard-success="clipboardOk()">{{::menu.address}}</span>
+                <!--
                 <span class="divider-2"></span>
                 <span class="inlineParagraph">Block:</span> <span id="blockheight">{{menu.blockHeight}}</span>
-            </span>
+              -->
+    </span>
 
     <div id="header-Iconset">
       <a ng-click="menu.showBackupDialog()">
@@ -1161,8 +1181,6 @@
               </tbody>
             </table>
           </div>
-
-          </p>
         </div>
         <!-- /COMMUNITY TAB -->
       </section>
