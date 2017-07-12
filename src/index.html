@@ -94,7 +94,7 @@
           <h2 id="AccHeader">{{accounts.caption}}</h2>
           <div class="wavesAccounts" ng-controller="accountListController as list" ng-show="accounts.mode === 'list'">
             <p class="loginAccountDiv" ng-repeat="account in list.accounts track by $index">
-                                    <span class="loginAccount fade" tooltipster tooltip-theme="tooltipster-theme1" title="Log into this account." ng-click="list.signIn(account)"> <br/>
+                                    <span class="loginAccount fade" tooltipster tooltip-theme="tooltipster-theme1" title="Entrar com essa conta." ng-click="list.signIn(account)"> <br/>
                                         <b>{{::account.name}}</b> <span class="divider-1"></span> <small>{{::account.address}}</small>
                                     </span>
               <span class="clipSpan" tooltipster tooltip-theme="tooltipster-theme1" ngclipboard title="Copiar este endereço." data-clipboard-text="{{::account.address}}" ngclipboard-success="clipboardOk()"></span>
@@ -282,7 +282,7 @@
       <p ng-class='{testnet: isTestnet()}'><!--{{::home.title}} <span class="wlcversion">{{::home.version}}</span>--></p>
     </div>
     <span id="version" class="centerIt">Seu Endereço:
-                <span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{::menu.address}}" ngclipboard-success="clipboardOk()">{{::menu.address}}</span>
+                <span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copiar endereço" ngclipboard data-clipboard-text="{{::menu.address}}" ngclipboard-success="clipboardOk()">{{::menu.address}}</span>
                 <!--
                 <span class="divider-2"></span>
                 <span class="inlineParagraph">Block:</span> <span id="blockheight">{{menu.blockHeight}}</span>
@@ -295,7 +295,7 @@
       </a>
       <div id="header-wPop-backup" waves-dialog global="true" on-dialog-ok="menu.backup()" ok-button-caption="COPIAR" cancel-button-caption="FECHAR">
         <h2 class="sectionHeader">FAÇA O BACKUP, É MUITO IMPORTANTE!</h2>
-        <p>Essas são as informações básicas da sua conta. Clique em <span class="fontBold">COPIAR</span> para copiar o conteúdo e salve-o em um lugar seguro <b>(mande um e-mail para você mesmo com as informações copiadas)</b>.</p></br>
+        <p>Essas são as informações básicas da sua conta. Clique no botão <span class="fontBold">COPIAR</span> para copiar o conteúdo e salve-o em um lugar seguro <b>(mande um e-mail para você mesmo com as informações copiadas)</b>.</p></br>
         <form id="backupForm">
           <label for="seedBackup">SEED (CHAVE DE SEGURANÇA)</label><br/>
           <textarea id="seedBackup" class="wInput" rows="4" readonly ng-model="menu.seed"></textarea><br/>
@@ -365,7 +365,7 @@
                           tooltipster
                           tooltip-html
                           tooltip-theme="tooltipster-theme3"
-                          tooltip-title="<center><u>Wallet</u></center><br/>Area containing the main wallets."></span>
+                          tooltip-title="<center><u>Wallet</u></center><br/>Sua carteira."></span>
         <!--
         <span waves-tab
               on-select="nav.changeTab(pageId)"
@@ -385,7 +385,7 @@
               tooltipster
               tooltip-html
               tooltip-theme="tooltipster-theme3"
-              tooltip-title="<center><u>Waves Decentralized Exchange</u></center><br/>Access to Waves markets where you can<br/>conveniently buy, sell and trade tokens."></span>
+              tooltip-title="<center><u>Mercado Choppcoin</u></center><br/>Aqui você pode comprar e vender Choppcoins."></span>
               <!--
         <span waves-tab
               on-select="nav.changeTab(pageId)"
@@ -406,7 +406,7 @@
               tooltipster
               tooltip-html
               tooltip-theme="tooltipster-theme3"
-              tooltip-title="<center><u>History</u></center><br/>Access all your transaction records."></span>
+              tooltip-title="<center><u>Histórico</u></center><br/>Suas transações passadas."></span>
               <!--
         <span waves-tab
               on-select="nav.changeTab(pageId)"
@@ -772,7 +772,7 @@
             </div>
           </div>
 
-          <div class="flex-container" style="background-color:yellow;color:red"><h3>IMPORTANTE: Já fez o backup? Clique no canto superior esquerdo e siga as instruções!</h3></div>
+          <div class="flex-container" style="background-color:yellow;color:red"><h3>IMPORTANTE: Já fez o backup? Clique no canto superior direito e siga as instruções!</h3></div>
 
           <div class="flex-container">
             <wallet-box class="walletBox"
@@ -784,50 +784,77 @@
           </div>
 
           <div class="flex-container" ng-controller="walletDepositController as deposit">
-            <div>
-                <br/>
-                <table style="height:100%" class="wavesTable bitcoin-requisites">
-                  <thead style="height:10%">
-                    <th>Seu Endereço</th>
+            <div class="walletBox">                
+                <table style="width:100%;" class="wavesTable bitcoin-requisites">
+                  <thead>
+                    <th>Receber 10 Choppcoins</th>
                   </thead>
                   <tbody>                                    
                   <tr><td>
-                    <a ng-href="{{deposit.real.address}}">
-                      <waves-qr-code class="center" size="180" value="deposit.real.address"></waves-qr-code>
+                    <a ng-href="{{deposit.real.qr_chopp}}">
+                      <waves-qr-code class="center" size="140" value="deposit.real.qr_chopp"></waves-qr-code>
                     </a>                            
-                    <br/><br/>
-                    <span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>                    
                   </td></tr>
                   </tbody>
                 </table>                              
             </div>
-            <div>
-                <br/>
-                <table style="height:100%" class="wavesTable bitcoin-requisites">
-                  <thead style="height:10%">
-                    <th>Bar</th><th>Endereço (Clique para copiar)</th>
+            <div class="walletBox">                
+                <table style="width:100%;" class="wavesTable bitcoin-requisites">
+                  <thead>
+                    <th>Receber 10 Reais</th>
                   </thead>
-                  <tbody>
-                  <tr><td><b>Bar Primeiro</b></td>
-                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
-                    </td>
-                  </tr>
-                  <tr><td><b>Bar Segundo</b></td>
-                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
-                    </td>
-                  </tr>
-                  <tr><td><b>Bar Terceiro</b></td>
-                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
-                    </td>
-                  </tr>
-                  <tr><td><b>Bar Quarto</b></td>
-                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
-                    </td>
-                  </tr>                  
+                  <tbody>                                    
+                  <tr><td>
+                    <a ng-href="{{deposit.real.qr_real}}">
+                      <waves-qr-code class="center" size="140" value="deposit.real.qr_real"></waves-qr-code>
+                    </a>                            
+                  </td></tr>
+                  </tbody>
+                </table>                              
+            </div>          
+            <div class="walletBox">                
+                <table style="width:100%;" class="wavesTable bitcoin-requisites">
+                  <thead>
+                    <th>Receber 0.005 Waves</th>
+                  </thead>
+                  <tbody>                                    
+                  <tr><td>
+                    <a ng-href="{{deposit.real.qr_waves}}">
+                      <waves-qr-code class="center" size="140" value="deposit.real.qr_waves"></waves-qr-code>
+                    </a>                            
+                  </td></tr>
                   </tbody>
                 </table>                              
             </div>            
           </div>
+
+          <div class="flex-container" ng-controller="walletDepositController as deposit">
+            <div class="walletBox" style="max-width:900px;min-height:220px;max-height:440px">                
+                <table style="height:100%;width:100%;" class="wavesTable bitcoin-requisites">
+                  <thead style="height:10%">
+                    <th>Favoritos</th><th>Clique p/ copiar</th>
+                  </thead>
+                  <tbody>
+                  <tr><td><b>Seu endereço</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copiar endereço" ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>
+                  <tr><td><b>Bar Primeiro</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copiar endereço" ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>
+                  <tr><td><b>Bar Segundo</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copiar endereço" ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>
+                  <tr><td><b>Bar Terceiro</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copiar endereço" ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>                  
+                  </tbody>
+                </table>                              
+            </div>  
+          </div>          
           <!--
           <waves-transaction-history heading="ÚLTIMAS TRANSAÇÕES"
                                      transactions="walletList.transactions"
