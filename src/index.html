@@ -19,7 +19,7 @@
 <html ng-app="app" ng-csp>
 <head>
   <meta charset="utf-8">
-  <title>Choppcoin Wallet</title>
+  <title>Carteira Choppcoin (Wallet)</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <!-- CSS BEGIN -->
   <link rel="stylesheet" href="../bower_components/angular/angular-csp.css">
@@ -29,7 +29,8 @@
   <link href="img/favicon.ico" type="image/x-icon" rel="shortcut icon">
 
   <style>
-    #bg-spin, header, #tabs, .wB-but  {
+  /*
+    #bg-spin, header, #tabs, .wB-but, waves-dex-orderbook table.buy thead, waves-dex-orderbook table.sell thead, waves-dex-history table thead, waves-dex-user-orders table.user thead  {
       background: #c98103;
     }
 
@@ -37,10 +38,10 @@
       background-color: #c98103;
     }
 
-    .wB-balInt, .wB-name, .wB-balDec {
-      color:#c98103;
-    }
-
+    .wB-balInt, .wB-name, .wB-balDec, waves-dex > .exchange > .choice .current-pair {
+        color: #c98103;
+    }    
+  */
     #logoNversion > img {
         width: 10rem;
     }
@@ -48,6 +49,16 @@
     .ng-binding{
         /*color: orange;*/
     }
+
+    tr.tx-in {
+        color: #4c7699 !important;
+        font-weight: bold;
+    }
+
+    waves-support-link {
+        display: none;
+    }
+
   </style>
 
 </head>
@@ -157,20 +168,27 @@
           <div id="register" ng-controller="accountRegisterController as vm" ng-show="accounts.mode === 'register'">
             <form id="register-form" name="registerForm" novalidate ng-submit="vm.saveAccountAndSignIn(registerForm)" ng-validate="vm.validationOptions">
               <div class="wPop-content">
-                <h3>ATENÇÃO: Faça BACKUP AGORA da sua CHAVE DE SEGURANÇA<br/>(EX: Mande um e-mail para você mesmo com o conteúdo abaixo).</h3>
+                <!--<h3>ATENÇÃO: Faça BACKUP da sua CHAVE DE SEGURANÇA</h3><br/>(EX: Mande um e-mail para você mesmo com o conteúdo abaixo).</h3>--
                 <br/>
-                <label for="readonlySeed">CHAVE DE SEGURANÇA (SEED)</label>
+                <label for="readonlySeed"><b>CHAVE DE SEGURANÇA</b></label>
                 <br/>
-                <textarea id="readonlySeed" rows="4" class="wInput" ng-model="vm.seed" ng-model-options="{ getterSetter: true }" readonly></textarea> 
-                <span class="clipSpan ng-isolate-scope tooltipstered" tooltipster="" tooltip-theme="tooltipster-theme1" ngclipboard="" data-clipboard-target="#readonlySeed" ngclipboard-success="clipboardOk()"></span>               
-                <br/>
-                <!--                
-                <br/>
-                <div>ENDEREÇO
-                  <br/>
-                  <span>{{accounts.displayAddress}}</span>
-                </div>
                 -->
+                <textarea style="display:none;" id="readonlySeed" rows="4" class="wInput" ng-model="vm.seed" ng-model-options="{ getterSetter: true }" readonly></textarea> 
+                <!--
+                <span class="clipSpan ng-isolate-scope tooltipstered" tooltipster="" tooltip-theme="tooltipster-theme1" ngclipboard="" data-clipboard-target="#readonlySeed" ngclipboard-success="clipboardOk()"></span>               
+                <br/>                                
+                <br/>-->
+                <div>                  
+                  <table>
+                    <thead>
+                      <th>NOVA CONTA GERADA</th>
+                    <tbody>
+                    <tr>
+                      <td>{{accounts.displayAddress}}</td>
+                    </tr>
+                    </tbody>
+                  </table>                  
+                </div>                
                 <br/>
                 <!--
                 <div class="form-field">
@@ -242,9 +260,9 @@
 <div id="wrapper" ng-switch-when="main-screen" ng-cloak>
   <!-- shared blocks -->
   <div id="feat-not-active" waves-dialog global="true" show-buttons="false" is-error="true">
-    <h2 class="sectionHeader">NOTICE</h2>
-    <p class="dialog-text">This feature is still under development and not active during the alpha release.</p>
-    <p class="dialog-text">Follow our social media channels to stay up to date with the latest improvements and developments.</p>
+    <h2 class="sectionHeader">INFORMAÇÃO</h2>
+    <p class="dialog-text">Esta funcionalidade ainda está em desenvolvimento.</p>
+    <p class="dialog-text">Siga nossas redes sociais para saber maiores novidades.</p>
     <div class="modal-media">
       <a href="https://blog.wavesplatform.com/" target="_blank"><img class="modal-media-img" src="img/blog_icon.svg" /></a>
       <a href="https://twitter.com/wavesplatform" target="_blank"><img class="modal-media-img" src="img/twitter_icon.svg" /></a>
@@ -273,24 +291,25 @@
 
     <div id="header-Iconset">
       <a ng-click="menu.showBackupDialog()">
-        <img class="header-Icon fade" tooltipster tooltip-theme="tooltipster-theme2" src="img/uiTB-iconset-backup.svg" alt="Backup" title="Backup"/>
+        <img class="header-Icon fade" tooltipster tooltip-theme="tooltipster-theme2" src="img/uiTB-iconset-backup.svg" alt="Fazer Backup" title="Fazer Backup"/>
       </a>
-      <div id="header-wPop-backup" waves-dialog global="true" on-dialog-ok="menu.backup()" ok-button-caption="COPY" cancel-button-caption="CLOSE">
-        <h2 class="sectionHeader">ACCOUNT INFO BACKUP</h2>
-        <p>This area contains your account's basic information. Click the <span class="fontBold">COPY</span> button in order to copy the contents to the clipboard or <span class="fontBold">CLOSE</span> to exit.</p></br>
+      <div id="header-wPop-backup" waves-dialog global="true" on-dialog-ok="menu.backup()" ok-button-caption="COPIAR" cancel-button-caption="FECHAR">
+        <h2 class="sectionHeader">FAÇA O BACKUP, É MUITO IMPORTANTE!</h2>
+        <p>Essas são as informações básicas da sua conta. Clique em <span class="fontBold">COPIAR</span> para copiar o conteúdo e salve-o em um lugar seguro <b>(mande um e-mail para você mesmo com as informações copiadas)</b>.</p></br>
         <form id="backupForm">
-          <label for="seedBackup">SEED</label><br/>
+          <label for="seedBackup">SEED (CHAVE DE SEGURANÇA)</label><br/>
           <textarea id="seedBackup" class="wInput" rows="4" readonly ng-model="menu.seed"></textarea><br/>
-          <label for="encodedSeedBackup">ENCODED SEED</label><br/>
+          <label for="encodedSeedBackup">SEED CRIPTOGRAFADO</label><br/>
           <textarea id="encodedSeedBackup" class="wInput" rows="4" readonly ng-model="menu.encodedSeed"></textarea><br/>
-          <label for="privateKeyBackup">PRIVATE KEY</label><br/>
+          <label for="privateKeyBackup">CHAVE PRIVADA</label><br/>
           <input id="privateKeyBackup" class="wInput" type="text" readonly ng-model="menu.privateKey"/><br/>
-          <label for="publicKeyBackup">PUBLIC KEY</label><br/>
+          <label for="publicKeyBackup">CHAVE PÚBLICA</label><br/>
           <input id="publicKeyBackup" class="wInput" type="text" readonly ng-model="menu.publicKey"/><br/>
-          <label for="addressBackup">ADDRESS</label><br/>
+          <label for="addressBackup">ENDEREÇO</label><br/>
           <input id="addressBackup" class="wInput" type="text" readonly ng-model="menu.address"/>
         </form>
       </div>
+      <!--
       <a ng-click="home.featureUnderDevelopment()">
         <img class="header-Icon fade" tooltipster tooltip-theme="tooltipster-theme2" src="img/uiTB-iconset-preferences.svg" alt="Preferences" title="Preferences"/>
       </a>
@@ -324,10 +343,11 @@
             <p class="dialog-text">Press <span class="fontBold"> CONFIRM </span>to execute or <span class="fontBold"> CANCEL </span> to discard this operation.</p>
           </div>
         </div>
-      </div>
+      </div>      
       <a ng-click="home.logout()">
-        <img class="header-Icon fade" tooltipster tooltip-theme="tooltipster-theme2" src="img/uiTB-iconset-logout.svg" alt="Log out" title="Log out" />
-      </a>
+        <img class="header-Icon fade" tooltipster tooltip-theme="tooltipster-theme2" src="img/uiTB-iconset-logout.svg" alt="Sair" title="Sair" />
+      </a>  
+      -->  
     </div>
     <waves-support-link class="in-header light"></waves-support-link>
   </header>
@@ -346,6 +366,7 @@
                           tooltip-html
                           tooltip-theme="tooltipster-theme3"
                           tooltip-title="<center><u>Wallet</u></center><br/>Area containing the main wallets."></span>
+        <!--
         <span waves-tab
               on-select="nav.changeTab(pageId)"
               current-page-id="nav.currentTab"
@@ -355,6 +376,7 @@
               tooltip-html
               tooltip-theme="tooltipster-theme3"
               tooltip-title="<center><u>Portfolio</u></center><br/>Display all your assets, both digital and physical,<br/>as well as allowing transfers."></span>
+            -->
         <span waves-tab
               on-select="nav.changeTab(pageId)"
               current-page-id="nav.currentTab"
@@ -364,6 +386,7 @@
               tooltip-html
               tooltip-theme="tooltipster-theme3"
               tooltip-title="<center><u>Waves Decentralized Exchange</u></center><br/>Access to Waves markets where you can<br/>conveniently buy, sell and trade tokens."></span>
+              <!--
         <span waves-tab
               on-select="nav.changeTab(pageId)"
               current-page-id="nav.currentTab"
@@ -372,7 +395,7 @@
               tooltipster
               tooltip-html
               tooltip-theme="tooltipster-theme3"
-              tooltip-title="<center><u>Leasing</u></center><br/>Lease your Waves<br/>to another wallet."></span>
+              tooltip-title="<center><u>Leasing</u></center><br/>Lease your Waves<br/>to another wallet."></span>-->
         <!--<span waves-tab on-select="nav.changeTab(pageId)" current-page-id="nav.currentTab" page-id="voting" caption="'Voting tab'" tooltipster tooltip-html-->
         <!--tooltip-theme="tooltipster-theme3" tooltip-title="<center><u>Voting Area</u></center><br/>Decentralized voting utility."></span>-->
         <span waves-tab
@@ -384,6 +407,7 @@
               tooltip-html
               tooltip-theme="tooltipster-theme3"
               tooltip-title="<center><u>History</u></center><br/>Access all your transaction records."></span>
+              <!--
         <span waves-tab
               on-select="nav.changeTab(pageId)"
               current-page-id="nav.currentTab"
@@ -392,9 +416,10 @@
               tooltipster
               tooltip-html
               tooltip-theme="tooltipster-theme3"
-              tooltip-title="<center><u>Tokens Creation tab</u></center><br/>Area in which assets can be created."></span>
+              tooltip-title="<center><u>Tokens Creation tab</u></center><br/>Area in which assets can be created."></span>-->
         <!--<span waves-tab on-select="nav.changeTab(pageId)" current-page-id="nav.currentTab" page-id="messages" caption="'Messages tab'" tooltipster tooltip-html-->
         <!--tooltip-theme="tooltipster-theme3" tooltip-title="<center><u>Decentralized Messenger</u></center><br/>Allows private communication between Waves users."></span>-->
+        <!--
         <span waves-tab
               on-select="nav.changeTab(pageId)"
               current-page-id="nav.currentTab"
@@ -403,7 +428,7 @@
               tooltipster
               tooltip-html
               tooltip-theme="tooltipster-theme3"
-              tooltip-title="<center><u>Community tab</u></center><br/>Resources to learn more about Waves project such as <br/>forums, blogs, websites, etc."></span>
+              tooltip-title="<center><u>Community tab</u></center><br/>Resources to learn more about Waves project such as <br/>forums, blogs, websites, etc."></span>-->
       </div>
     </section>
 
@@ -414,39 +439,39 @@
         <div id="mBB-wallet" class="mBB-content" ng-switch-when="wallet" ng-controller="walletListController as walletList">
 
           <div class="noDisp" ng-controller="walletSendController as send">
-            <div id="wB-butSend-WAV" waves-dialog ok-button-caption="SUBMIT" cancel-button-visible="false" on-dialog-ok="send.submitTransfer(send.form)">
+            <div id="wB-butSend-WAV" waves-dialog ok-button-caption="ENVIAR" cancel-button-visible="false" on-dialog-ok="send.submitTransfer(send.form)">
               <form id="send-waves-form" name="send.form" class="paymentForm" novalidate ng-validate="send.validationOptions">
-                <h2 class="sectionHeader">SEND PAYMENT: {{send.currency}}</h2>
+                <h2 class="sectionHeader">Pagar em {{send.currency}}</h2>
                 <table>
                   <div class="balanceAmt">
-                    <div ng-if="!send.feeAndTransferAssetsAreTheSame"><p>Asset balance: </p><span class="balancewaves">{{send.assetBalance | moneyLong:true}}</span><br/></div>
-                    <p>Waves balance: </p><span class="balancewaves">{{send.feeAssetBalance | moneyLong:true}}</span>
+                    <div ng-if="!send.feeAndTransferAssetsAreTheSame"><p>Saldo: </p><span class="balancewaves">{{send.assetBalance | moneyLong:true}}</span><br/></div>
+                    <p>Para taxa: </p><span class="balancewaves">{{send.feeAssetBalance | moneyLong:true}}</span>
                   </div>
                   <thead>
                   <tr>
-                    <th>DESCRIPTION</th>
-                    <th>INPUT</th>
+                    <th>DESCRIÇÃO</th>
+                    <th>&nbsp;</th>
                   </tr>
                   </thead>
                   <tbody>
                   <tr>
-                    <td>Recipient's Address</td>
+                    <td>Pagar para</td>
                     <td>
                       <div class="form-field">
-                        <input class="wInput form-control" name="sendRecipient" type="text" placeholder="Recipient" ng-model="send.recipient" />
+                        <input class="wInput form-control" name="sendRecipient" type="text" placeholder="Endereço" ng-model="send.recipient" />
                       </div>
                     </td>
                   </tr>
                   <tr>
-                    <td>Amount</td>
+                    <td>Quantidade</td>
                     <td>
                       <div class="form-field">
-                        <input class="wInput form-control" name="sendAmount" type="text" placeholder="Amount" ng-model="send.amount" decimal-input-restrictor />
+                        <input class="wInput form-control" name="sendAmount" type="text" placeholder="" ng-model="send.amount" decimal-input-restrictor />
                       </div>
                     </td>
                   </tr>
                   <tr>
-                    <td>Attachment</td>
+                    <td>Mensagem</td>
                     <td>
                       <div class="form-field">
                         <textarea rows="2" class="wInput form-control" name="sendAttachment" ng-model="send.attachment"></textarea>
@@ -454,7 +479,7 @@
                     </td>
                   </tr>
                   <tr>
-                    <td>Fee</td>
+                    <td>Taxa</td>
                     <td>
                       <md-autocomplete md-input-name="sendFee" md-selected-item="send.autocomplete.selectedFee" md-search-text="send.autocomplete.searchText"
                                        md-items="item in send.autocomplete.querySearch(send.autocomplete.searchText)"
@@ -470,13 +495,13 @@
                 </table>
               </form>
             </div>
-            <div id="send-payment-confirmation" waves-dialog ok-button-caption="CONFIRM" ok-button-enabled="!send.broadcast.pending" on-dialog-ok="send.broadcastTransaction()">
+            <div id="send-payment-confirmation" waves-dialog ok-button-caption="CONFIRMAR" ok-button-enabled="!send.broadcast.pending" on-dialog-ok="send.broadcastTransaction()">
               <div class="dialog-confirmation">
-                <p class="dialog-text">You are sending <span class="confirmation-value">{{send.confirm.amount | moneyLong:true}}</span> with
-                  <span class="confirmation-value">{{send.confirm.fee | moneyLong:true}}</span> fee to the address<br/>
+                <p class="dialog-text">Você está enviando <span class="confirmation-value">{{send.confirm.amount | moneyLong:true}}</span>, pagando 
+                  <span class="confirmation-value">{{send.confirm.fee | moneyLong:true}}</span> de taxa, para o endereço <br/>
                   <span class="confirmation-value">{{send.confirm.recipient}}</span>
                 </p>
-                <p class="dialog-text">Please <span class="fontBold"> CONFIRM </span>to execute or <span class="fontBold"> CANCEL </span> to discard.</p>
+                <p class="dialog-text">Por favor, clique <span class="fontBold"> CONFIRMAR </span>para executar ou <span class="fontBold"> CANCELAR </span> para sair.</p>
               </div>
             </div>
           </div>
@@ -607,6 +632,43 @@
           </div>
 
           <div class="noDisp" ng-controller="walletDepositController as deposit">
+            <div id="deposit-real-dialog" waves-dialog ok-button-caption="CLOSE" cancel-button-visible="false">
+              <h2 class="sectionHeader">DEPOSIT: REAL</h2>
+              <p class="dialog-text textCenter">VERIFICATION</p>
+              <p class="dialog-text textCenter">
+                In order to deposit Euros directly from your bank<br/>
+                account through SEPA transfer you MUST get verified<br/>
+                by our partner <a href="https://www.idnow.eu/" target="_blank">IDNow.eu</a>
+              </p>
+              <p class="dialog-text textCenter">
+                <a href="https://wavesplatform.userecho.com/topics/1303-buying-eurotoken-with-sepa-transfer/" target="_blank">Read more about SEPA transfers</a>
+              </p>
+              <p class="dialog-text textCenter">
+                <a href="https://wavesplatform.userecho.com/topics/1304-list-of-accepted-countries-and-documents-for-verification/" target="_blank">List of eligible countries and IDs</a>
+              </p>
+              <p class="dialog-text textCenter">
+                In order to get verified follow the link:<br/>
+                <a href="{{deposit.fiat.verificationLink}}" target="_blank">{{deposit.fiat.verificationLink}}</a>
+              </p>
+              <p class="dialog-text textCenter">We don't accept international wire transfers from US Citizens or from USA Banks</p>
+              <br/>
+              <p class="dialog-text textCenter">
+                In case the link doesn't work for you,<br/>
+                please just send an email to<br/>
+                <span class="email"
+                      title="Copy this address to the clipboard"
+                      tooltipster
+                      tooltip-theme="tooltipster-theme1"
+                      ngclipboard
+                      data-clipboard-text="{{deposit.fiat.email}}"
+                      ngclipboard-success="clipboardOk()">{{deposit.fiat.email}}</span>
+                <br/>
+                with your Waves wallet address as the subject
+              </p>             
+            </div>
+          </div>
+
+          <div class="noDisp" ng-controller="walletDepositController as deposit">
             <div id="deposit-eur-dialog" waves-dialog ok-button-caption="CLOSE" cancel-button-visible="false">
               <h2 class="sectionHeader">DEPOSIT: EUR</h2>
               <p class="dialog-text textCenter">VERIFICATION</p>
@@ -641,7 +703,7 @@
                 with your Waves wallet address as the subject
               </p>
             </div>
-          </div>
+          </div>          
 
           <div class="noDisp" ng-controller="walletDepositController as deposit">
             <div id="deposit-usd-dialog" waves-dialog ok-button-caption="CLOSE" cancel-button-visible="false">
@@ -710,6 +772,8 @@
             </div>
           </div>
 
+          <div class="flex-container" style="background-color:yellow;color:red"><h3>IMPORTANTE: Já fez o backup? Clique no canto superior esquerdo e siga as instruções!</h3></div>
+
           <div class="flex-container">
             <wallet-box class="walletBox"
                         ng-repeat="w in walletList.wallets"
@@ -718,13 +782,61 @@
                         on-withdraw="walletList.withdraw(w)"
                         on-deposit="walletList.deposit(w)"></wallet-box>
           </div>
-          <waves-transaction-history heading="LATEST TRANSACTIONS"
+
+          <div class="flex-container" ng-controller="walletDepositController as deposit">
+            <div>
+                <br/>
+                <table style="height:100%" class="wavesTable bitcoin-requisites">
+                  <thead style="height:10%">
+                    <th>Seu Endereço</th>
+                  </thead>
+                  <tbody>                                    
+                  <tr><td>
+                    <a ng-href="{{deposit.real.address}}">
+                      <waves-qr-code class="center" size="180" value="deposit.real.address"></waves-qr-code>
+                    </a>                            
+                    <br/><br/>
+                    <span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>                    
+                  </td></tr>
+                  </tbody>
+                </table>                              
+            </div>
+            <div>
+                <br/>
+                <table style="height:100%" class="wavesTable bitcoin-requisites">
+                  <thead style="height:10%">
+                    <th>Bar</th><th>Endereço (Clique para copiar)</th>
+                  </thead>
+                  <tbody>
+                  <tr><td><b>Bar Primeiro</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>
+                  <tr><td><b>Bar Segundo</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>
+                  <tr><td><b>Bar Terceiro</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>
+                  <tr><td><b>Bar Quarto</b></td>
+                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copy the address to clipboard." ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
+                    </td>
+                  </tr>                  
+                  </tbody>
+                </table>                              
+            </div>            
+          </div>
+          <!--
+          <waves-transaction-history heading="ÚLTIMAS TRANSAÇÕES"
                                      transactions="walletList.transactions"
                                      limit-to="10"></waves-transaction-history>
+          -->
         </div>
         <!-- / WALLET TAB -->
 
-        <!-- PORTFOLIO TAB -->
+        <!-- PORTFOLIO TAB --
         <div id="mBB-portfolio" class="mBB-content wScroll" ng-switch-when="portfolio">
           <div ng-controller="assetListController as assetList">
             <h2 class="sectionHeader">PORTFOLIO</h2>
@@ -755,7 +867,7 @@
                   <button class="wButton wButton-neg fade" ng-click="assetList.assetDetails(tx.id)">DETAILS</button><span class="divider-2"></span>
                   <!-- TODO: remove MASS PAY feature or re-engineer it using a centralized service
                   <button class="wButton wButton-neg fade" ng-click="assetList.assetMassPay(tx.id)">MASS PAY</button>
-                  -->
+                  --
                 </td>
               </tr>
               </tbody>
@@ -1021,13 +1133,13 @@
         </waves-page>
         <!-- / DEX TAB -->
 
-        <!-- LEASING TAB -->
+        <!-- LEASING TAB --
         <waves-page ng-switch-when="leasing" page-title="Leasing">
           <waves-leasing></waves-leasing>
         </waves-page>
         <!-- / LEASING TAB -->
 
-        <!-- VOTING TAB -->
+        <!-- VOTING TAB --
         <div id="mBB-voting" class="mBB-content" ng-switch-when="voting">
           <div class="phContent">
             <h1>DECENTRALIZED VOTING</h1>
@@ -1044,13 +1156,13 @@
 
         <!-- HISTORY TAB -->
         <div id="mBB-history" class="mBB-content" ng-switch-when="history" ng-controller="historyController as history">
-          <waves-transaction-history heading="LATEST TRANSACTIONS"
+          <waves-transaction-history heading="ÚLTIMAS TRANSAÇÕES"
                                      transactions="history.transactions"
                                      limit-to="50"></waves-transaction-history>
         </div>
         <!-- / HISTORY TAB -->
 
-        <!-- TOKENS TAB -->
+        <!-- TOKENS TAB --
         <div id="mBB-token" class="mBB-content" ng-switch-when="tokens">
 
           <div ng-controller="tokenCreateController as ctrl">
@@ -1094,8 +1206,8 @@
                 </tbody>
               </table>
               <div>
-                <button class="wButton wButton-neg fade" type="submit">SUBMIT</button><span class="divider-2"></span>
-                <button class="wButton wButton-neg fade" type="button" ng-click="ctrl.resetForm()">CLEAR</button>
+                <button class="wButton wButton-neg fade" type="submit">ENVIAR</button><span class="divider-2"></span>
+                <button class="wButton wButton-neg fade" type="button" ng-click="ctrl.resetForm()">LIMPAR</button>
               </div>
             </form>
 
@@ -1114,7 +1226,7 @@
         </div>
         <!-- / TOKENS TAB -->
 
-        <!-- MESSAGES TAB -->
+        <!-- MESSAGES TAB --
         <div id="mBB-messages" class="mBB-content" ng-switch-when="messages">
           <div class="phContent">
             <h1>MESSAGING CENTER</h1>
@@ -1147,9 +1259,9 @@
         </div>
         <!-- / MESSAGES TAB -->
 
-        <!-- COMMUNITY TAB -->
+        <!-- COMMUNITY TAB --
         <div id="mBB-community" class="mBB-content" ng-switch-when="community" ng-controller="communityController as community">
-          <!-- Temporary -->
+          <!-- Temporary --
           <p>DISCLAIMER: The Community tab will temporarily hold block information for testing purposes. After alpha phase this data  will be relocated inside the Preferences - Advanced area.</p>
           <h2 class="sectionHeader">LATEST BLOCKS INFORMATION</h2>
           <p class="centerIt">
