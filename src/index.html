@@ -58,6 +58,24 @@
     waves-support-link {
         display: none;
     }
+	
+	.walletBoxChopp {
+		position: relative;
+		-webkit-box-flex: 1;
+		-ms-flex: 1;
+		flex: 1;
+		min-width: 260px;
+		max-width: 300px;
+		/*height: 220px; *chopp* */
+		border: 1px solid #dcdcdc;
+		margin: 5px;
+		padding: 10px;
+		border-radius: 20px 20px 20px 20px;
+		overflow: hidden;
+		/*chopp*/
+		max-width:920px;		
+	}
+	
 
   </style>
 
@@ -829,10 +847,10 @@
           </div>
 
           <div class="flex-container" ng-controller="walletDepositController as deposit">
-            <div class="walletBox" style="max-width:900px;min-height:220px;max-height:440px">                
-                <table style="height:100%;width:100%;" class="wavesTable bitcoin-requisites">
-                  <thead style="height:10%">
-                    <th>Favoritos</th><th>Clique p/ copiar</th>
+            <div class="walletBoxChopp">                
+                <table style="width:100%;" class="wavesTable bitcoin-requisites">
+                  <thead>
+                    <th>Favoritos</th><th>Clique para copiar</th>
                   </thead>
                   <tbody>
                   <tr><td><b>Seu endereço</b></td>
@@ -847,10 +865,6 @@
                     <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copiar endereço" ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
                     </td>
                   </tr>
-                  <tr><td><b>Bar Terceiro</b></td>
-                    <td><span id="wavesAccountAddress" class="clipSpan" tooltipster tooltip-theme="tooltipster-theme3" title="Copiar endereço" ngclipboard data-clipboard-text="{{deposit.real.address}}" ngclipboard-success="clipboardOk()">{{deposit.real.address}}</span>
-                    </td>
-                  </tr>                  
                   </tbody>
                 </table>                              
             </div>  
