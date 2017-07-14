@@ -313,7 +313,7 @@
       </a>
       <div id="header-wPop-backup" waves-dialog global="true" on-dialog-ok="menu.backup()" ok-button-caption="COPIAR" cancel-button-caption="FECHAR">
         <h2 class="sectionHeader">FAÇA O BACKUP, É MUITO IMPORTANTE!</h2>
-        <p>Essas são as informações básicas da sua conta. Clique no botão <span class="fontBold">COPIAR</span> para copiar o conteúdo e salve-o em um lugar seguro <b>(mande um e-mail para você mesmo com as informações copiadas)</b>.</p></br>
+        <p>Essas são as informações básicas da sua conta. Clique no botão <span class="fontBold">COPIAR</span> para copiar o conteúdo e salve-o (Ctrl+V) em um lugar seguro <b>(mande um e-mail para você mesmo com as informações copiadas)</b>.</p></br>
         <form id="backupForm">
           <label for="seedBackup">SEED (CHAVE DE SEGURANÇA)</label><br/>
           <textarea id="seedBackup" class="wInput" rows="4" readonly ng-model="menu.seed"></textarea><br/>
@@ -758,7 +758,7 @@
             </div>
           </div>
 
-          <div class="flex-container" style="background-color:yellow;color:red"><h3>IMPORTANTE: Já fez o backup? Clique no canto superior direito e siga as instruções!</h3></div>
+          <div id="forgetMeDiv" class="flex-container" style="background-color:yellow;color:red"><h3>IMPORTANTE: Já fez o backup? Clique agora no canto superior direito e siga as instruções!</h3> <button id="forgetMe">Fechar</button></div>          
 
           <div class="flex-container">
             <wallet-box class="walletBox"
@@ -1312,6 +1312,15 @@
 <!-- JAVASCRIPT BEGIN -->
 <script src="../distr/devel/js/bundle.js"></script>
 <script src="../distr/devel/js/templates.js"></script>
+<script>
+    if(localStorage.getItem("DontShow")) {
+        $("#forgetMeDiv").hide();
+    }
+    $(document).on("click", "#forgetMe", function() {
+        localStorage.setItem("DontShow", "true");
+        $("#forgetMeDiv").hide();
+    });
+</script>
 <!-- JAVASCRIPT END -->
 
 </body>
